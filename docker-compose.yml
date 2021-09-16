@@ -1,0 +1,71 @@
+version: '3'
+services:
+  alan_wake_mysql:
+    image: mysql:5.7
+    container_name: alan_wake_mysql
+    env_file: .env
+    environment:
+      MYSQL_ROOT_PASSWORD: alan_wake
+    ports:
+      - 127.0.0.1:$ALAN_WAKE_MYSQL_PORT:3306
+
+  #################### Base  ####################
+
+  base: &base
+    image: darthjee/alan_wake
+    volumes:
+      - ./source:/home/app/app
+    links:
+      - alan_wake_mysql:mysql
+    env_file: .env
+
+
+  base_build:
+    <<: *base
+    build:
+      context: .
+      dockerfile: Dockerfile.alan_wake
+    command: echo done
+
+  production_base_build:
+    image: darthjee/production_alan_wake
+    env_file: .env
+    environment:
+      RAILS_ENV: production
+    build:
+      context: .
+      dockerfile: Dockerfile.production_alan_wake
+    links:
+      - alan_wake_mysql:mysql
+    command: echo done
+  #################### CONTAINERS ####################
+
+  alan_wake_app:
+    <<: *base
+    container_name: alan_wake_app
+    command: /bin/bash bin/server.sh
+    depends_on: [base_build]
+    ports:
+      - 127.0.0.1:3000:3000
+    environment:
+      - RAILS_ENV=development
+      - ALAN_WAKE_MYSQL_PORT=3306
+
+  alan_wake_tests:
+    <<: *base
+    container_name: alan_wake_tests
+    command: /bin/bash bin/tests.sh
+    depends_on: [base_build]
+    environment:
+      - RAILS_ENV=test
+
+  alan_wake_root:
+    <<: *base
+    user: root
+    container_name: alan_wake_root
+    command: /bin/bash
+    depends_on: [base_build]
+  alan_wake_production:
+    env_file: .env.production
+    container_name: alan_wake_production
+    image: $PRODUCTION_IMAGE
