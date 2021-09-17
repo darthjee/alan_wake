@@ -3,6 +3,14 @@
 require 'spec_helper'
 
 describe Session do
+  subject(:session) { build(:session) }
+
+  describe 'validations' do
+    it do
+      expect(session).to validate_presence_of(:user)
+    end
+  end
+
   describe 'scopes' do
     describe '.active' do
       let!(:session) do
