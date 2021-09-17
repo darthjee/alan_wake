@@ -3,6 +3,37 @@
 require 'spec_helper'
 
 describe User do
+  subject(:user) { build(:user) }
+
+  describe 'validations' do
+    it do
+      expect(user).to validate_presence_of(:login)
+    end
+
+    it do
+      expect(user).to validate_length_of(:login)
+        .is_at_most(50)
+    end
+
+    it do
+      expect(user).to validate_presence_of(:email)
+    end
+
+    it do
+      expect(user).to validate_length_of(:email)
+        .is_at_most(100)
+    end
+
+    it do
+      expect(user).to validate_presence_of(:name)
+    end
+
+    it do
+      expect(user).to validate_length_of(:name)
+        .is_at_most(100)
+    end
+  end
+
   describe '.login' do
     let!(:user)    { create(:user, password: password) }
     let(:password) { 'my_custom_password' }
