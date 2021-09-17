@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_17_152359) do
+ActiveRecord::Schema.define(version: 2021_09_17_205106) do
+
+  create_table "games", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", limit: 100, null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_games_on_name"
+    t.index ["user_id"], name: "fk_rails_de9e6ea7f7"
+  end
 
   create_table "sessions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -29,5 +38,6 @@ ActiveRecord::Schema.define(version: 2021_09_17_152359) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "games", "users"
   add_foreign_key "sessions", "users"
 end
