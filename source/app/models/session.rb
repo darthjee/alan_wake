@@ -4,4 +4,6 @@ class Session < ApplicationRecord
   scope :active, -> { where('expiration IS NULL OR expiration > ?', Time.now) }
 
   belongs_to :user
+
+  validates_presence_of :user
 end

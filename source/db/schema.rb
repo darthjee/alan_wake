@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_17_205106) do
+ActiveRecord::Schema.define(version: 2021_09_17_213438) do
 
   create_table "games", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", limit: 100, null: false
@@ -29,13 +29,15 @@ ActiveRecord::Schema.define(version: 2021_09_17_205106) do
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "login", null: false
-    t.string "email", null: false
-    t.string "encrypted_password", null: false
-    t.string "salt", null: false
-    t.string "name", null: false
+    t.string "login", limit: 50, null: false
+    t.string "email", limit: 100, null: false
+    t.string "encrypted_password", limit: 64, null: false
+    t.string "salt", limit: 32, null: false
+    t.string "name", limit: 100, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["login"], name: "index_users_on_login", unique: true
   end
 
   add_foreign_key "games", "users"
