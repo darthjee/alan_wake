@@ -7,6 +7,7 @@ class Settings
 
   with_settings(
     :password_salt,
+    session_period: 2.days,
     cache_age: 10.seconds
   )
 end
