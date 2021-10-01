@@ -4,9 +4,14 @@
     'binded_http'
   ]);
 
-  function Controller(http, notifier) {
+  function Controller(http, notifier, timeout) {
     this.http = http.bind(this);
     this.notifier = notifier;
+    this.timeout = timeout;
+
+    _.bindAll(this, 'finishRequest', '_login', '_completeLogoff');
+    this._listen();
+    this._checkLogin();
   }
 
   var fn = Controller.prototype;
@@ -45,10 +50,10 @@
 
   fn.finishRequest = function() {
     this.ongoing = false;
-  }
+  };
 
   app.controller('Global.HeaderController', [
-    'binded_http', 'cyberhawk_notifier',
+    'binded_http', 'cyberhawk_notifier', '$timeout',
     Controller
   ]);
 
