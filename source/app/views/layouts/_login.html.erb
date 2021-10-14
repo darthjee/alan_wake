@@ -4,17 +4,17 @@
       <form ng-controller="Login.Controller as loginController">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Fazer login</h4>
+          <h4 class="modal-title">Login</h4>
         </div>
         <div class="alert alert-danger" ng-show="loginController.incorrect">
-          Usu&aacute;rio e senha incorretos.
+          User name or password incorrect.
         </div>
         <div class="alert alert-danger" ng-show="loginController.error">
-          Ocorreu um erro inesperado, tente novamente mais tarde.
+          An unexpected error occourred, please try again later
         </div>
         <div class="modal-body">
           <div class="form-group">
-            <label for="login">Nome de usu&aacute;rio</label>
+            <label for="login">Username</label>
             <input
                    type="text"
                    class="form-control"
@@ -23,7 +23,7 @@
                    ng-model="loginController.login">
           </div>
           <div class="form-group">
-            <label for="password">Senha</label>
+            <label for="password">Password</label>
             <input
                    type="password"
                    class="form-control"
@@ -37,14 +37,14 @@
              type="button"
              class="btn btn-default"
              data-dismiss="modal">
-            Cancelar
+            Cancel
           </button>
           <button
              type="submit"
              class="btn btn-primary"
              ng-disabled="loginController.ongoing"
              ng-click="loginController.submit()">
-            Fazer Login
+            Login
           </button>
         </div>
       </form>
