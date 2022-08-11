@@ -8,7 +8,7 @@ ruby '2.7.0'
 gem 'bundler', '2.3.15'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.2.6'
+gem 'rails', '5.2.8.1'
 
 # Use pg as the database for Active Record
 gem 'mysql2'
