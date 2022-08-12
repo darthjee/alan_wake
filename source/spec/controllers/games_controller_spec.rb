@@ -160,7 +160,7 @@ describe GamesController, :logged, type: :controller do
 
       let(:payload) do
         {
-          title: 'my game'
+          name: 'my game'
         }
       end
 
@@ -285,7 +285,7 @@ describe GamesController, :logged, type: :controller do
 
       let(:payload) do
         {
-          title: 'new title'
+          name: 'new name'
         }
       end
 
@@ -293,7 +293,7 @@ describe GamesController, :logged, type: :controller do
 
       it 'updates the game' do
         expect { patch :update, params: parameters }
-          .to(change { game.reload.title })
+          .to(change { game.reload.name })
       end
 
       it 'returns game with errors' do
