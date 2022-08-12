@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ItemsController < ApplicationController
+class GamesController < ApplicationController
   include OnePageApplication
   include LoggedUser
 
