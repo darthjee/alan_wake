@@ -304,4 +304,3 @@ describe GamesController, :logged, type: :controller do
     end
   end
 end
-
