@@ -10,5 +10,10 @@ class GamesController < ApplicationController
                except: :delete,
                paginated: true,
                per_page: Settings.pagination
-end
 
+  private
+
+  def games
+    logged_user.games
+  end
+end
