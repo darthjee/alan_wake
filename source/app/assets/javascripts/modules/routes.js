@@ -16,6 +16,8 @@
         controller: 'Home.Controller',
         controllerAs: 'hc'
       }
+    }, {
+      routes: ["/games", "/games/new", "/games/:id", "/games/:id/edit"]
     }];
     provider.$get().bindRoutes();
   }]);
