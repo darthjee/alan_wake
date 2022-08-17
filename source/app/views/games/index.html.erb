@@ -1,1 +1,46 @@
-INDEX
+<div class="card-deck mb-3">
+  <div class="card mb-4 shadow-sm">
+    <div class="card-header">
+      <h4 class="my-0 font-weight-normal">
+        Games
+      </h4>
+    </div>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <th scope="col">Id</th>
+          <th scope="col">Title</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="2">
+              <%= angular_safe_link_to(:new_game, {}, class: "text-dark") do %>
+              + New Game
+              <% end %>
+            </td>
+          </tr>
+          <tr ng-repeat="game in gnc.data">
+            <td>
+              <%= angular_safe_link_to(:game, { id: "{{game.id}}" }, class: "text-dark") do %>
+              {{game.id}}
+              <% end %>
+            </td>
+            <td>{{game.name}}</td>
+            <td>
+              <%= angular_safe_link_to(:edit_game, { id: "{{game.id}}" }, class: "text-dark") do %>
+              edit
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <%= magicka_display('gnc') do |display|
+              display.pagination('pagination',
+              path_method: :games
+              )
+              end %>
+
+    </div>
+  </div>
+</div>
