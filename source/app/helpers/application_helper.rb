@@ -18,8 +18,18 @@ module ApplicationHelper
     end
   end
 
-  def angular_path_to(path)
-    "##{path}"
+  def angular_path_to(path_method, **path_args)
+    if path_method.is_a?(String)
+      "##{path_method}"
+    else
+      path = public_send(
+        "#{path_method}_safe_path", path_args
+      )
+      puts "-" * 80
+      puts path
+      puts "-" * 80
+      angular_path_to(path)
+    end
   end
 
   def method_missing(method, *args)
