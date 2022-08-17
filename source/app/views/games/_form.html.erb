@@ -20,7 +20,7 @@
         <%= form.only(:display) do
           form.button(
             classes: 'btn-primary',
-            href: angular_path_to(:edit_game, { id: "{{gnc.data.id}}" }),
+            href: angular_path_to(edit_game_path({ id: "{{gnc.data.id}}" })),
             text: 'Edit'
           )
         end %>
