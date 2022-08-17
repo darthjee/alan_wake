@@ -25,9 +25,6 @@ module ApplicationHelper
       path = public_send(
         "#{path_method}_safe_path", path_args
       )
-      puts "-" * 80
-      puts path
-      puts "-" * 80
       angular_path_to(path)
     end
   end
